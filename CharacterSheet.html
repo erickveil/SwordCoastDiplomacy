@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sword Coast Diplomacy</title>
+</head>
+<body>
+<H1>Sword Coast Diplomacy</H1>
+<p>
+    <span>Name</span>
+    <input type="text" name="attr_name"/>
+</p>
+
+<div class="sheet-3colrow">
+    <div class="sheet-col">
+        <h2>Inputs</h2>
+
+        <h3>Civic</h3>
+
+        <p>
+            <span>Population</span>
+            <input type="text" name="attr_population" />
+        </p>
+
+        <p>
+            <span>Treasury</span>
+            <input type="text" name="attr_treasury" />
+        </p>
+
+
+        <h3>Military</h3>
+
+        <p>
+            <span>Army Points</span>
+            <input type="text" name="attr_armyPoints" value="1540" />
+        </p>
+
+        <p>
+            <span>Recruits This Year</span>
+            <input type="text" name="attr_recruits" />
+        </p>
+
+        <p>
+            <span>Mercenary Points</span>
+            <input type="text" name="attr_mercenaryPoints" value="0"/>
+        </p>
+
+        <p>
+            <span>Baggage Points</span>
+            <input type="text" name="attr_baggagePoints" value="0"/>
+        </p>
+
+        <p>
+            <span>Prisoners</span>
+            <input type="text" name="attr_prisoners" value="0"/>
+        </p>
+
+        <p>
+            <span>Embezzlement Loss</span>
+            <input type="text" name="attr_embezzlement" value="0"/>%
+        </p>
+
+        <h3>Taxes</h3>
+        <p>
+            <span>Census Tax Level</span>
+            <input type="text" name="attr_censusTax" value="1"/>
+        </p>
+
+        <p>
+            <span>Production Tax</span>
+            <input type="text" name="attr_productionTax" value="20"/>
+        </p>
+
+        <h3>Controlled Hexes</h3>
+
+        <p>
+            <span>Cultivated</span>
+            <input type="text" name="attr_hexCultivated" value="0"/>
+        </p>
+
+        <p>
+            <span>River</span>
+            <input type="text" name="attr_hexRiver" value="0"/>
+        </p>
+
+        <p>
+            <span>Coast</span>
+            <input type="text" name="attr_hexCoast" value="0"/>
+        </p>
+
+        <p>
+            <span>Plains</span>
+            <input type="text" name="attr_hexPlains" value="0"/>
+        </p>
+
+        <p>
+            <span>Forest</span>
+            <input type="text" name="attr_hexForest" value="0"/>
+        </p>
+
+        <p>
+            <span>Hills</span>
+            <input type="text" name="attr_hexHills" value="0"/>
+        </p>
+
+        <p>
+            <span>Mountains</span>
+            <input type="text" name="attr_hexMountains" value="0"/>
+        </p>
+
+    </div>
+    <div class="sheet-col">
+        <h2>Expenses</h2>
+
+        <p>
+            <span>Peacetime Military Costs</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_militaryCostPeace"
+                   value="(@{armyPoints}*5)"/>
+        </p>
+
+        <p>
+            <span>Wartime Military Costs</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_militaryCostWar"
+                   value="(@{militaryCostPeace}*1.5)"/>
+        </p>
+
+        <p>
+            <span>Mercenary Costs</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_mercenaryCost"
+                   value="(@{mercenaryPoints}*6.5)"/>
+        </p>
+
+        <p>
+            <span>Baggage Cost</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_baggageCost"
+                   value="(@{baggagePoints}*1)"/>
+        </p>
+
+        <p>
+            <span>Prisoner Costs</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_prisonerCosts"
+                   value="(@{prisoners}*0.25)"
+            />
+        </p>
+
+    </div>
+
+    <div class="sheet-col">
+        <h2>Income</h2>
+
+        <p>
+            <span>Census Tax Income</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_censusTaxAmt"
+                   value="(@{censusTax}*@{population}*0.25)"/>
+        </p>
+
+        <p>
+            <span>Production Income</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_productionIncome"
+                   value="(
+                            (
+                                (
+                                    (@{hexCultivated}*1000)
+                                   +(@{hexRiver}*1200)
+                                   +(@{hexCoast}*600)
+                                   +(@{hexPlains}*800)
+                                   +(@{hexForest}*500)
+                                   +(@{hexHills}*600)
+                                   +(@{hexMountains}*400)
+                               )
+                               *(@{productionTax}/100)
+                            )
+                           /4
+                         )"/>
+        </p>
+
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
