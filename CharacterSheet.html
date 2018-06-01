@@ -37,11 +37,6 @@
         </p>
 
         <p>
-            <span>Recruits This Year</span>
-            <input type="text" name="attr_recruits" />
-        </p>
-
-        <p>
             <span>Mercenary Points</span>
             <input type="text" name="attr_mercenaryPoints" value="0"/>
         </p>
@@ -56,20 +51,53 @@
             <input type="text" name="attr_prisoners" value="0"/>
         </p>
 
-        <p>
-            <span>Embezzlement Loss</span>
-            <input type="text" name="attr_embezzlement" value="0"/>%
-        </p>
+        <h4>Available Military</h4>
 
-        <h3>Taxes</h3>
         <p>
-            <span>Census Tax Level</span>
-            <input type="text" name="attr_censusTax" value="1"/>
+            <span>Recruits This Year</span>
+            <input type="text" name="attr_recruits" />
         </p>
 
         <p>
-            <span>Production Tax</span>
-            <input type="text" name="attr_productionTax" value="20"/>
+            <span>Recruitment Level</span>
+            <input type="text" name="attr_recruitmentLevel" />
+        </p>
+
+        <p>
+            <span>Volunteer</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_volunteerRemaining"
+                   value="(round(@{typicalRemaining}*0.6))" />
+        </p>
+
+        <p>
+            <span>Typical</span>
+            <input type="text"
+                   disabled="true"
+                   style="display:none;"
+                   name="attr_typicalRecruit"
+                   value="((@{population}*0.1)/3)"/>
+            <input type="text"
+                   disabled="true"
+                   name="attr_typicalRemaining"
+                   value="(round(@{typicalRecruit} - @{recruits}))" />
+        </p>
+
+        <p>
+            <span>Strained</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_strainedRemaining"
+                   value="(round(@{typicalRemaining}*2))" />
+        </p>
+
+        <p>
+            <span>Max</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_maxRemaining"
+                   value="(round(@{strainedRemaining}*1.3))" />
         </p>
 
         <h3>Controlled Hexes</h3>
@@ -150,14 +178,86 @@
             <input type="text"
                    disabled="true"
                    name="attr_prisonerCosts"
-                   value="(@{prisoners}*0.25)"
-            />
+                   value="(@{prisoners}*0.25)" />
+        </p>
+
+        <h3>Nobility</h3>
+        <p>
+            <span>Share of Taxes</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_nobilityCosts"
+                   value="(round(@{netIncome}*0.6))" />
+        </p>
+
+        <p>
+            <span>Unrest Level</span>
+            <input type="number" name="attr_embezzlePct" value="0" />
+        </p>
+
+        <p>
+            <span>Embezzlement Amount</span>
+            <input type="text"
+                   disabled="true"
+                   style="display: none;"
+                   name="attr_embezzPctDec"
+                   value="(@{embezzlePct}*0.01)" />
+
+            <input type="text"
+                   disabled="true"
+                   style="display: none;"
+                   name="attr_stateCut"
+                   value="((@{productionIncome} + @{censusTaxAmt}) / 3)" />
+
+            <input type="text"
+                   disabled="true"
+                   name="attr_embezzleAmt"
+                   value="( round( @{stateCut} * @{embezzPctDec} ) )" />
+        </p>
+
+        <h3>Total Expenses</h3>
+        <p>
+            <span>Peacetime</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_totalExpensesPeace"
+                   value="(round(
+                           @{militaryCostPeace}
+                          +@{mercenaryCost}
+                          +@{baggageCost}
+                          +@{prisonerCosts}
+                          +@{nobilityCosts}
+                          ))" />
+        </p>
+        <p>
+            <span>Wartime</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_totalExpensesWar"
+                   value="(round(
+                           @{militaryCostWar}
+                          +@{mercenaryCost}
+                          +@{baggageCost}
+                          +@{prisonerCosts}
+                          +@{nobilityCosts}
+                          ))" />
         </p>
 
     </div>
 
     <div class="sheet-col">
         <h2>Income</h2>
+
+        <h3>Taxes</h3>
+        <p>
+            <span>Census Tax Level</span>
+            <input type="text" name="attr_censusTax" value="1"/>
+        </p>
+
+        <p>
+            <span>Production Tax</span>
+            <input type="text" name="attr_productionTax" value="20"/>
+        </p>
 
         <p>
             <span>Census Tax Income</span>
@@ -187,6 +287,31 @@
                             )
                            /4
                          )"/>
+        </p>
+
+        <h3>Total Income</h3>
+        <p>
+            <input type="text"
+                   disabled="true"
+                   name="attr_netIncome"
+                   value="(@{productionIncome}+@{censusTaxAmt}-@{embezzleAmt})" />
+        </p>
+
+        <h3>Quarterly Profit or Loss</h3>
+
+        <p>
+            <span>Peacetime</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_pnlPeace"
+                   value="(round(@{netIncome} - @{totalExpensesPeace}))" />
+        </p>
+        <p>
+            <span>Wartime</span>
+            <input type="text"
+                   disabled="true"
+                   name="attr_pnlWar"
+                   value="(round(@{netIncome} - @{totalExpensesWar}))" />
         </p>
 
     </div>
