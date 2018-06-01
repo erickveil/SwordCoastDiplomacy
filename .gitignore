@@ -56,4 +56,4 @@ fabric.properties
 # other crap
 .idea/*.iml
 .idea/modules.xml
-
+.idea/vcs.xml
