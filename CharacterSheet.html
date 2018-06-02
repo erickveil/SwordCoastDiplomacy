@@ -187,7 +187,10 @@
             <input type="text"
                    disabled="true"
                    name="attr_nobilityCosts"
-                   value="(round(@{netIncome}*0.6))" />
+                   value="(round(
+                        @{censusTaxAmt}
+                        +@{productionIncome}
+                        *0.6))" />
         </p>
 
         <p>
@@ -215,6 +218,26 @@
                    value="( round( @{stateCut} * @{embezzPctDec} ) )" />
         </p>
 
+        <h2>Misc Expenses</h2>
+        <fieldset class="repeating_miscIncome" >
+            <p>
+                <span>Name</span>
+                <input type="text" name="attr_miscExpenseName" />
+            </p>
+            <p>
+                <span>Ammount</span>
+                <input type="text" name="attr_miscExpenseAmt" value="0" />
+            </p>
+            <p>
+                <span>Description</span>
+                <textarea name="attr_miscExpenseDesc" ></textarea>
+            </p>
+        </fieldset>
+        <p>
+            <span>Misc Expenses Total</span>
+            <input type="text" name="attr_miscExpenseTotal" value="0"/>
+        </p>
+
         <h3>Total Expenses</h3>
         <p>
             <span>Peacetime</span>
@@ -227,6 +250,7 @@
                           +@{baggageCost}
                           +@{prisonerCosts}
                           +@{nobilityCosts}
+                          +@{miscExpenseTotal}
                           ))" />
         </p>
         <p>
@@ -240,6 +264,7 @@
                           +@{baggageCost}
                           +@{prisonerCosts}
                           +@{nobilityCosts}
+                          +@{miscExpenseTotal}
                           ))" />
         </p>
 
@@ -289,12 +314,18 @@
                          )"/>
         </p>
 
+
         <h3>Total Income</h3>
         <p>
             <input type="text"
                    disabled="true"
                    name="attr_netIncome"
-                   value="(@{productionIncome}+@{censusTaxAmt}-@{embezzleAmt})" />
+                   value="(
+                        @{productionIncome}
+                        +@{censusTaxAmt}
+                        +@{mineTotal}
+                        +@{miscIncomeTotal}
+                        -@{embezzleAmt})" />
         </p>
 
         <h3>Quarterly Profit or Loss</h3>
@@ -314,6 +345,67 @@
                    value="(round(@{netIncome} - @{totalExpensesWar}))" />
         </p>
 
+
+        <h2>Mines</h2>
+        <fieldset class="repeating_mines">
+            <p>
+                <span>Resource</span>
+                <select name="attr_mineType" >
+                    <option value="5000">Copper</option>
+                    <option value="5000000">Diamond</option>
+                    <option value="1000000">Emerald</option>
+                    <option value="500000">Gold</option>
+                    <option value="30000">Iron</option>
+                    <option value="1000">Lead</option>
+                    <option value="2000000">Ruby</option>
+                    <option value="50000">Silver</option>
+                    <option value="2000">Tin</option>
+                </select>
+            </p>
+            <p>
+                <span>Level</span>
+                <input type="number" name="attr_mineLevel" value="1" />
+            </p>
+            <p>
+                <span>Hex Number</span>
+                <input type="text" name="attr_mineHex" />
+            </p>
+            <p>
+                <span>Value</span>
+                <input type="text"
+                       disabled="true"
+                       name="attr_mineValue"
+                       value="((@{mineType} * @{mineLevel})/4)"
+                />
+            </p>
+        </fieldset>
+        <p>
+            <span>Mines Total</span>
+            <input type="text" name="attr_mineTotal" value="0"/>
+        </p>
+
+
+
+
+        <h2>Misc Income</h2>
+        <fieldset class="repeating_miscIncome" >
+            <p>
+                <span>Name</span>
+                <input type="text" name="attr_miscIncomeName" />
+            </p>
+            <p>
+                <span>Ammount</span>
+                <input type="text" name="attr_miscIncomeAmt" value="0" />
+            </p>
+            <p>
+                <span>Description</span>
+                <textarea name="attr_miscIncomeDesc" ></textarea>
+            </p>
+        </fieldset>
+        <p>
+            <span>Misc Income Total</span>
+            <input type="text" name="attr_miscIncomeTotal" value="0"/>
+        </p>
     </div>
 </div>
 
