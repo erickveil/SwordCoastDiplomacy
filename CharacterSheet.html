@@ -218,26 +218,6 @@
                    value="( round( @{stateCut} * @{embezzPctDec} ) )" />
         </p>
 
-        <h2>Misc Expenses</h2>
-        <fieldset class="repeating_miscIncome" >
-            <p>
-                <span>Name</span>
-                <input type="text" name="attr_miscExpenseName" />
-            </p>
-            <p>
-                <span>Ammount</span>
-                <input type="text" name="attr_miscExpenseAmt" value="0" />
-            </p>
-            <p>
-                <span>Description</span>
-                <textarea name="attr_miscExpenseDesc" ></textarea>
-            </p>
-        </fieldset>
-        <p>
-            <span>Misc Expenses Total</span>
-            <input type="text" name="attr_miscExpenseTotal" value="0"/>
-        </p>
-
         <h3>Total Expenses</h3>
         <p>
             <span>Peacetime</span>
@@ -266,6 +246,26 @@
                           +@{nobilityCosts}
                           +@{miscExpenseTotal}
                           ))" />
+        </p>
+
+        <h2>Misc Expenses</h2>
+        <fieldset class="repeating_miscExpenses" >
+            <p>
+                <span>Name</span>
+                <input type="text" name="attr_miscExpenseName" />
+            </p>
+            <p>
+                <span>Ammount</span>
+                <input type="text" name="attr_miscExpenseAmt" value="0" />
+            </p>
+            <p>
+                <span>Description</span>
+                <textarea name="attr_miscExpenseDesc" ></textarea>
+            </p>
+        </fieldset>
+        <p>
+            <h3>Misc Expenses Total</h3>
+            <input type="text" name="attr_miscExpenseTotal" value="0"/>
         </p>
 
     </div>
@@ -380,7 +380,7 @@
             </p>
         </fieldset>
         <p>
-            <span>Mines Total</span>
+            <h3>Mines Total</h3>
             <input type="text" name="attr_mineTotal" value="0"/>
         </p>
 
@@ -403,7 +403,7 @@
             </p>
         </fieldset>
         <p>
-            <span>Misc Income Total</span>
+            <h3>Misc Income Total</h3>
             <input type="text" name="attr_miscIncomeTotal" value="0"/>
         </p>
     </div>
